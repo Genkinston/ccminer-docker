@@ -1,0 +1,22 @@
+{
+    "pools":[
+    {
+            "name": "luckpool",
+    "url": "stratum+tcp://eu.luckpool.net:3956",
+            "timeout": 150
+    },
+    {
+            "name": "nicehash",
+    "url": "stratum+tcp://verushash.auto.nicehash.com:9200",
+            "timeout": 60,
+            "time-limit": 600
+    }],
+
+    "user": "RE5UZfBFcZt5q6hzAELExTuHMZ7j28uvjR.genpi",
+    "algo": "verus",
+    "threads": 8,
+    "cpu-priority": 1,
+    "retry-pause": 5,
+    "api-allow": "192.168.0.0/16",
+    "api-bind": "0.0.0.0:4068"
+}

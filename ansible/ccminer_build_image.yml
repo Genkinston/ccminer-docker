@@ -1,0 +1,28 @@
+- name: Build miner docker image
+  hosts: orangepi
+  become: true
+
+  vars:
+    # Имя образа
+    image_name: ccminer_opi5_docker
+
+    # Версия образа
+    image_version: latest
+
+  tasks:
+
+    - name: Install Docker buildx plugin
+      ansible.builtin.apt:
+        pkg:
+          - docker-buildx
+
+    - name: Copy source to target
+      ansible.builtin.copy:
+        src: ../docker
+        dest: /home/ubuntu/build
+        mode: "0666"
+
+    - name: Buld miner image
+      community.docker.docker_image_build:
+        path: /home/ubuntu/build/docker
+        name: "{{ image_name }}:{{ image_version }}"

@@ -1,0 +1,14 @@
+- name: Crontab cleaner
+  hosts: orangepi
+  become: true
+
+  tasks:
+    - name: Remove user's crontab
+      ansible.builtin.cron:
+        user: ubuntu
+        name: "@reboot job"
+        state: absent
+        job: "/home/ubuntu/ccminer/start.sh"
+
+    - name: Reboot after cleaning
+      reboot:

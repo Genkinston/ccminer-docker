@@ -1,0 +1,19 @@
+- name: Miner starter
+  hosts: all
+  become: true
+
+  vars:
+    # Имя образа
+    image_name: ccminer_opi5_docker
+
+    # Версия образа
+    image_version: latest
+
+  tasks:
+
+    - name: Run container
+      community.docker.docker_container:
+        name: "miner"
+        image: "{{ image_name }}:{{ image_version }}"
+        state: started
+        restart_policy: always
