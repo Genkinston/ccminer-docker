@@ -1,0 +1,12 @@
+---
+# tasks file for roles/docker_start
+- name: Run container
+  community.docker.docker_container:
+    name: "miner"
+    image: "{{ docker_start_image_name }}:{{ docker_start_image_version }}"
+    state: started
+   # command: "/miner/ccminer/ccminer -c /miner/ccminer/config.json"
+    restart_policy: "on-failure"
+    ports:
+      - "4068:4068"
+

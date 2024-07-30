@@ -1,0 +1,17 @@
+---
+# tasks file for docker_installer
+- name: Update apt cache
+  apt:
+    update_cache: true
+
+- name: Upgrade apt
+  apt:
+    upgrade: true
+
+- name: Install Docker on opi5
+  ansible.builtin.apt:
+    pkg:
+      - docker.io
+
+- name: Add user to Docker group
+  command: usermod -aG docker "{{ ansible_user }}"

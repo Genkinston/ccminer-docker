@@ -1,0 +1,34 @@
+---
+# tasks file for docker_cleaner
+
+    - name: Get running containers
+      docker_host_info:
+        containers: true
+      register: docker_info
+
+    - name: Stop running containers
+      docker_container:
+        name: "{{ item }}"
+        state: stopped
+      loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
+
+    - name: Remove Stoped docker containers
+      shell: |
+        docker rm $(docker ps -a -q);
+      when: docker_info.containers != 0
+
+    - name: Get details of all images
+      docker_host_info:
+        images: true
+        verbose_output: true
+      register: image_info
+
+    - name: Remove all images
+      docker_image:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ image_info.images | map(attribute='Id') | list }}"
+
+    - name: Clean Docker cache
+      command: docker image prune -a -f
+      changed_when: false

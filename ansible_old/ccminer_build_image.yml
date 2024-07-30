@@ -18,7 +18,7 @@
 
     - name: Copy source to target
       ansible.builtin.copy:
-        src: ../docker
+        src: ./docker
         dest: /home/ubuntu/build
         mode: "0666"
 

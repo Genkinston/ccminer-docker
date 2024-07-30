@@ -1,5 +1,5 @@
 - name: Miner starter
-  hosts: all
+  hosts: orangepi5plus
   become: true
 
   vars:

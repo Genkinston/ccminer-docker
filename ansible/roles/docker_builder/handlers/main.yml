@@ -1,0 +1,9 @@
+---
+# handlers file for first_setup
+
+- name: Run container
+  community.docker.docker_container:
+    name: "miner"
+    image: "{{ docker_builder_image_name }}:{{ docker_builder_image_version }}"
+    state: started
+    restart_policy: always

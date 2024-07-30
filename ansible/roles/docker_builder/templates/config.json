@@ -1,18 +1,18 @@
 {
     "pools":[
     {
-            "name": "luckpool",
-    "url": "stratum+tcp://eu.luckpool.net:3956",
+            "name": "{{ docker_builder_name_first }}",
+    "url": "{{ docker_builder_url_first  }}",
             "timeout": 150
     },
     {
-            "name": "nicehash",
-    "url": "stratum+tcp://verushash.auto.nicehash.com:9200",
+            "name": "{{ docker_builder_name_second }}",
+    "url": "{{ docker_builder_url_second }}",
             "timeout": 60,
             "time-limit": 600
     }],
 
-    "user": "RE5UZfBFcZt5q6hzAELExTuHMZ7j28uvjR.opi5",
+    "user": "{{ docker_builder_wallet }}.{{ docker_builder_rig_name }}",
     "algo": "verus",
     "threads": 8,
     "cpu-priority": 1,
