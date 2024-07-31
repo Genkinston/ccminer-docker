@@ -1,8 +1,0 @@
-- name: Install docker environment and build miner image
-  hosts: orangepi
-  gather_facts: true
-  become: true
-  roles:
-    - docker_installer
-    - docker_builder
-    - docker_start
