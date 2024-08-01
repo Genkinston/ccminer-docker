@@ -1,9 +1,10 @@
 ---
 # tasks file for first_setup
-- name: Install Docker buildx plugin
+- name: Install Docker buildx plugin and exporter
   ansible.builtin.apt:
     pkg:
       - docker-buildx
+      - node-exporter
 
 - name: Copy sources to target
   ansible.builtin.copy:
