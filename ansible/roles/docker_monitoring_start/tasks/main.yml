@@ -1,0 +1,35 @@
+---
+# tasks file for roles/docker_monitoring_start
+- name: Run container Prometheus
+  community.docker.docker_container:
+    name: "Prometheus"
+    image: "{{ docker_monitoring_builder_image_name_prometheus }}:{{ docker_monitoring_builder_image_version_prometheus }}"
+    state: started
+    restart_policy: "on-failure"
+    expose: "{{ docker_monitoring_builder_prometheus_port }}"
+    ports:
+      - "{{ docker_monitoring_builder_prometheus_port }}:{{ docker_monitoring_builder_prometheus_port }}"
+    volumes:
+      - "{{ docker_monitoring_builder_config_path }}:{{ docker_monitoring_builder_config_path }}"
+
+- name: Run container Alertmanager
+  community.docker.docker_container:
+    name: "Alertmanager"
+    image: "{{ docker_monitoring_builder_image_name_alertmanager }}:{{ docker_monitoring_builder_image_version_alertmanager }}"
+    state: started
+    restart_policy: "on-failure"
+    expose: "{{ docker_monitoring_builder_alertmanager_port }}"
+    ports:
+      - "{{ docker_monitoring_builder_alertmanager_port }}:{{ docker_monitoring_builder_alertmanager_port }}"
+    volumes:
+      - "{{ docker_monitoring_builder_config_path }}:{{ docker_monitoring_builder_config_path }}"
+
+- name: Run container Grafana
+  community.docker.docker_container:
+    name: "Grafana"
+    image: "grafana/grafana-oss:11.1.3-ubuntu"
+    state: started
+    restart_policy: "on-failure"
+    expose: "3000"
+    ports:
+      - "3000:3000"

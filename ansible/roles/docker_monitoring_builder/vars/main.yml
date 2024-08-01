@@ -1,0 +1,13 @@
+---
+# vars file for roles/docker_monitoring
+docker_monitoring_builder_config_path: "/monitoring/config"
+docker_monitoring_builder_source_path: "/home/{{ ansible_user }}/build/docker"
+
+docker_monitoring_builder_image_name_prometheus: "prometheus"
+docker_monitoring_builder_image_name_alertmanager: "alertmanager"
+
+docker_monitoring_builder_image_version_prometheus: "2.53.1"
+docker_monitoring_builder_image_version_alertmanager: "0.27.0"
+
+docker_monitoring_builder_prometheus_port: "9090"
+docker_monitoring_builder_alertmanager_port: "9093"

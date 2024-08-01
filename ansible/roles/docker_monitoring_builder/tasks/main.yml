@@ -1,0 +1,40 @@
+---
+# tasks file for roles/docker_monitoring
+# - name: Install Docker buildx plugin
+#   ansible.builtin.apt:
+#     pkg:
+#       - docker-buildx
+
+- name: Copy sources to target
+  ansible.builtin.copy:
+    src: docker
+    dest: "/home/{{ ansible_user }}/build"
+    mode: "0666"
+
+- name: Create config directory
+  file:
+    path: "/monitoring/config"
+    state: directory
+    mode: "0666"
+
+- name: Create config for Prometheus from template
+  template:
+    src: ./prometheus.yml
+    dest: "{{ docker_monitoring_builder_config_path }}"
+    mode: "0666"
+
+- name: Create config for Alertmanager from template
+  template:
+    src: ./alertmanager.yml
+    dest: "{{ docker_monitoring_builder_config_path }}"
+    mode: "0666"
+
+- name: Build Prometheus image
+  community.docker.docker_image_build:
+    path: "{{ docker_monitoring_builder_source_path }}/prometheus"
+    name: "{{ docker_monitoring_builder_image_name_prometheus }}:{{ docker_monitoring_builder_image_version_prometheus }}"
+
+- name: Build Alertmanager image
+  community.docker.docker_image_build:
+    path: "{{ docker_monitoring_builder_source_path }}/alertmanager"
+    name: "{{ docker_monitoring_builder_image_name_alertmanager }}:{{ docker_monitoring_builder_image_version_alertmanager }}"
