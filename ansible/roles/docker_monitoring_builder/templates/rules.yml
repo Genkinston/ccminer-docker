@@ -5,13 +5,13 @@ groups:
     expr: up{job="node"} == 0
     for: 10s
     annotations:
-      title: 'CA Node Exporter Down'
-      description: 'CA Node Exporter Down'
+      title: 'Node Exporter Down'
+      description: 'Node Exporter Down'
     labels:
       severity: 'crit'
 
-  - alert: High_CPU_utiluzation
-    expr: node_load1{job="node"} > 0.9
+  - alert: Low_CPU_utiluzation
+    expr: node_load1{job="node"} < 0.9
     for: 1m
     annotations:
       title: 'High CPU utiluzation'
