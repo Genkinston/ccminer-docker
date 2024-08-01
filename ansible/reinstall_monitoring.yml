@@ -1,0 +1,8 @@
+- name: Reinstall docker environment and build monitoring images
+  hosts: raspberrypi5
+  gather_facts: true
+  become: true
+  roles:
+    - docker_cleaner
+    - docker_monitoring_builder
+    - docker_monitoring_start

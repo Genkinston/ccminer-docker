@@ -4,5 +4,5 @@
   become: true
   roles:
     - docker_cleaner
-    - docker_builder
-    - docker_start
+    - docker_miner_builder
+    - docker_miner_start
