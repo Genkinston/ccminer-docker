@@ -1,8 +1,0 @@
----
-# vars file for roles/docker_start
-
-# Имя образа
-docker_start_image_name: ccminer_opi5_docker
-
-# Версия образа
-docker_start_image_version: latest
