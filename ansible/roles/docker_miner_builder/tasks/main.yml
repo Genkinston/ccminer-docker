@@ -26,4 +26,4 @@
 - name: Build miner image
   community.docker.docker_image_build:
     path: "/home/{{ ansible_user }}/build/docker"
-    name: "{{ docker_builder_image_name }}:{{ docker_builder_image_version }}"
+    name: "{{ docker_miner_builder_image_name }}:{{ docker_miner_builder_image_version }}"
