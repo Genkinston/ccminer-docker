@@ -11,3 +11,4 @@ docker_monitoring_builder_image_version_alertmanager: "0.27.0"
 
 docker_monitoring_builder_prometheus_port: "9090"
 docker_monitoring_builder_alertmanager_port: "9093"
+docker_monitoring_builder_node_exporter_port: "9100"

@@ -1,10 +1,5 @@
 ---
 # tasks file for roles/docker_monitoring
-# - name: Install Docker buildx plugin
-#   ansible.builtin.apt:
-#     pkg:
-#       - docker-buildx
-
 - name: Copy sources to target
   ansible.builtin.copy:
     src: docker
@@ -20,6 +15,12 @@
 - name: Create config for Prometheus from template
   template:
     src: ./prometheus.yml
+    dest: "{{ docker_monitoring_builder_config_path }}"
+    mode: "0666"
+
+- name: Create rules for Prometheus from template
+  template:
+    src: ./rules.yml
     dest: "{{ docker_monitoring_builder_config_path }}"
     mode: "0666"
 
