@@ -4,7 +4,7 @@
   ansible.builtin.apt:
     pkg:
       - docker-buildx
-      - node-exporter
+      #- node-exporter
 
 - name: Copy sources to target
   ansible.builtin.copy:

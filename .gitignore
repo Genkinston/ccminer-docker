@@ -2,6 +2,3 @@ ansible/inventory.ini
 ansible/group_vars/orangepi
 ansible/group_vars/orangepi5plus
 ansible/group_vars/raspberrypi5
-ansible/group_vars/orangepi
-ansible/group_vars/orangepi5plus
-ansible/inventory.ini
