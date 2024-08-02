@@ -3,6 +3,6 @@
   gather_facts: true
   become: true
   roles:
-    - docker_miner_installer
+    - docker_installer
     - docker_miner_builder
     - docker_miner_start
