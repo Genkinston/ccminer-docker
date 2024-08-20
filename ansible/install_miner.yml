@@ -1,5 +1,5 @@
 - name: Install docker environment and build miner image
-  hosts: orangepi
+  hosts: orangepi5-1-2
   gather_facts: true
   become: true
   roles:
