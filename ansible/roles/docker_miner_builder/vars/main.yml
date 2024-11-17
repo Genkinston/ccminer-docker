@@ -1,7 +1,7 @@
 ---
 # vars file for docker_miner_builder
 # Имя образа
-docker_miner_builder_image_name: ccminer_opi5_docker
+docker_miner_builder_image_name: ccminer_docker
 # Версия образа
 docker_miner_builder_image_version: latest
 # pool
@@ -11,3 +11,4 @@ docker_miner_builder_name_second: pool.verus.io
 docker_miner_builder_url_second: stratum+tcp://pool.verus.io:9998
 docker_miner_builder_wallet: RE5UZfBFcZt5q6hzAELExTuHMZ7j28uvjR
 docker_miner_builder_rig_name: "{{ ansible_hostname }}"
+docker_miner_builder_threads: "{{ ansible_processor_vcpus }}"
