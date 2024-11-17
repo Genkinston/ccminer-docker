@@ -4,7 +4,7 @@
   ansible.builtin.apt:
     pkg:
       - docker-buildx
-      #- node-exporter
+      - prometheus-node-exporter
 
 - name: Copy sources to target
   ansible.builtin.copy:
@@ -13,13 +13,13 @@
     mode: "0666"
 
 - name: Create config directory
-  file:
+  ansible.builtin.file:
     path: /miner/ccminer/config
     state: directory
     mode: "0666"
 
 - name: Create config from template
-  template:
+  ansible.builtin.template:
     src: ./config.json
     dest: "/home/{{ ansible_user }}/build/docker"
     mode: "0666"
