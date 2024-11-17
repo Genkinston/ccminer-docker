@@ -1,5 +1,5 @@
 - name: Reinstall docker environment and build miner image
-  hosts: orangepi
+  hosts: all
   gather_facts: true
   become: true
   roles:
