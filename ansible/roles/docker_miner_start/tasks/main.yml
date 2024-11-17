@@ -6,6 +6,8 @@
     image: "{{ docker_miner_start_image_name }}:{{ docker_miner_start_image_version }}"
     state: started
     #  command: "/miner/ccminer/ccminer -c /miner/ccminer/config.json"
+    restart: true
+    pull: false
     restart_policy: "on-failure"
     ports:
       - "4068:4068"
