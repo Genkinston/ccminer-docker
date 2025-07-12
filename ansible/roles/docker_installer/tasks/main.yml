@@ -8,10 +8,59 @@
   apt:
     upgrade: true
 
-- name: Install Docker on opi5
-  ansible.builtin.apt:
-    pkg:
-      - docker.io
+- name: Install required system packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - software-properties-common
+    state: present
+    update_cache: yes
 
-- name: Add user to Docker group
-  command: usermod -aG docker "{{ ansible_user }}"
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Determine Raspberry Pi architecture
+  command: dpkg --print-architecture
+  register: architecture
+  changed_when: false
+
+- name: Set correct Docker repository architecture
+  set_fact:
+    docker_arch: >-
+      {% if architecture.stdout == 'arm64' %}arm64
+      {% elif architecture.stdout == 'armhf' %}armhf
+      {% else %}amd64{% endif %}
+
+- name: Add Docker repository for Raspberry Pi
+  apt_repository:
+    repo: "deb [arch={{ docker_arch }}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker-ce
+
+- name: Install Docker CE
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+
+- name: Ensure Docker service is running and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add current user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
